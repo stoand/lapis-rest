@@ -1,11 +1,12 @@
 local config = require("lapis.config")
+local secrets = require("./secrets")
 
 config("development", {
   postgres = {
     backend = "pgmoon",
     host = "127.0.0.1",
     user = "postgres",
-    password = " ",
+    password = secrets.postgres_password,
     database = "lapis"
   },
   port = 8080
@@ -16,9 +17,14 @@ config("production", {
     backend = "pgmoon",
     host = "127.0.0.1",
     user = "postgres",
-    password = " ",
+    password = secrets.postgres_password,
     database = "lapis"
   },
-  code_cache = 'on',
-  port = 80
+  lua_code_cache = 'on',
+  secret = secrets.app_secret,
+  port = 80,
+  logging = {
+    queries = false,
+    request = false
+  }
 })

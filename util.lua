@@ -1,1 +1,0 @@
-function map(table, requirements) end
